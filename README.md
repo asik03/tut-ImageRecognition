@@ -11,3 +11,5 @@ conda create -n tensorflow pip python=3.6
 conda activate tensorflow
 pip install -r requirements.txt
 ```
+
+## Directories description
