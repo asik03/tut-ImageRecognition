@@ -1,0 +1,5 @@
+raw_data/*.jpg
+test/smile/*.jpg
+test/non_smile/*.jpg
+train/smile/*.jpg
+train/non_smile/*.jpg

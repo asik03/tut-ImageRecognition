@@ -4,6 +4,7 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
+
 class CNNSmile:
     def __init__(self, dropout_prob=0.25):
         self.dropout_prob = dropout_prob
@@ -12,8 +13,7 @@ class CNNSmile:
     def build_model(self, input_shape):
         model = Sequential()
         
-        model.add(Conv2D(32, (3, 3), padding='same',
-                 input_shape=input_shape))
+        model.add(Conv2D(32, (3, 3), padding='same', input_shape=input_shape))
         model.add(Activation('relu'))
         
         model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -67,4 +67,3 @@ class CNNSmile:
     
     def save_model(self, model_path):
         self.model.save(model_path)
-    

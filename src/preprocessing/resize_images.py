@@ -8,7 +8,7 @@ Created on Wed Sep 19 18:45:27 2018
 import cv2
 import os
 
-raw_path = '../../etc/raw_faces'
+raw_path = '../../etc/raw_data'
 processed_path = '../../etc/processed_faces'
 
 for dirname, dirnames, filenames in os.walk(raw_path):
