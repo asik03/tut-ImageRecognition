@@ -1,3 +1,7 @@
 from src.utilities.data_loader import DataLoader
 
-DataLoader.organize_data('C:\\Users\\Jorge\\PycharmProjects\\image-recognition\\etc\\')
+import src.config as config
+
+
+if __name__ == '__main__':
+    DataLoader.organize_data(config.ETC_DIR)

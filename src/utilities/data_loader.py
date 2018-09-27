@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
 from shutil import copy
-import cv2 as cv
-
 
 from keras.preprocessing.image import ImageDataGenerator
 # from keras.preprocessing.image import load_img
@@ -13,10 +11,10 @@ class DataLoader:
     def get_train_generator(cls, data_path, classes, batch_size):
         data_gen = ImageDataGenerator(rescale=1.0/255)
 
-        train_path = os.path.join(data_path, 'train')
+        # train_path = os.path.join(data_path, 'train')
 
         train_generator = data_gen.flow_from_directory(
-                train_path,
+                data_path,
                 target_size=(64, 64),
                 batch_size=batch_size,
                 class_mode='binary',
@@ -60,7 +58,4 @@ class DataLoader:
 
         for new_path, old_path in zip(new_paths, old_paths):
             for file_path in old_path:
-                img = cv.imread(file_path)
-
-
-                copy(img, new_path)
+                copy(file_path, new_path)
