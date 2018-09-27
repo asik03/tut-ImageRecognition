@@ -3,17 +3,47 @@ import os
 from shutil import copy
 
 import cv2 as cv
+import numpy as np
 from keras.preprocessing.image import ImageDataGenerator
+from keras.utils import to_categorical
+from sklearn.model_selection import train_test_split
 
 from src.utilities.face_segmenter import FaceSegmenter
 
 
 class DataLoader:
     @classmethod
+    def get_train_data(cls, data_path, classes):
+        for class_name in classes:
+            class_path = os.path.join(data_path, class_name)
+            file_names = os.listdir(class_path)
+
+            file_names = list(filter(lambda x: x.endswith('.jpg'), file_names))
+            file_names.sort()
+
+            data = []
+            labels = []
+            for file_name in file_names:
+                file_path = os.path.join(class_path, file_name)
+                image = cv.imread(file_path)
+                image = cv.resize(image, (64, 64))
+                image = image.img_to_array()
+                data.append(image)
+                label = 1 if class_name == 'smile' else 0
+                labels.append(label)
+
+        data = np.array(data, dtype='float') / 255.0
+        labels = np.array(labels)
+        (train_x, test_x, train_y, test_y) = train_test_split(data, labels, test_size=0.2, random_state=42)
+
+        test_y = to_categorical(test_y, num_classes=2)
+        train_y = to_categorical(train_y, num_classes=2)
+
+        return train_x, test_x, train_y, test_y
+
+    @classmethod
     def get_train_generator(cls, data_path, classes, batch_size):
         data_gen = ImageDataGenerator(rescale=1.0/255)
-
-        # train_path = os.path.join(data_path, 'train')
 
         train_generator = data_gen.flow_from_directory(
                 data_path,

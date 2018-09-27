@@ -1,7 +1,6 @@
-from src.utilities.data_loader import DataLoader
-from src.cnn.cnn_smile import CNNSmile
-
 import src.config as config
+from src.cnn.cnn_smile import CNNSmile
+from src.utilities.data_loader import DataLoader
 
 if __name__ == '__main__':
     batch_size = 32
