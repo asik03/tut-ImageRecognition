@@ -29,13 +29,13 @@ class CNNSmile:
         model.add(Activation('relu'))
 
         model.add(MaxPooling2D(pool_size=(2, 2)))
-        # model.add(Dropout(self.dropout_prob))
+        # model.add(Dropout(0.5))
 
         model.add(Flatten())
 
         model.add(Dense(128))
         model.add(Activation('relu'))
-        # model.add(Dropout(self.dropout_prob))
+        model.add(Dropout(0.5))
 
         model.add(Dense(1))
 
@@ -47,7 +47,7 @@ class CNNSmile:
                       optimizer=optimizer,
                       metrics=['accuracy'])
         self.model = model
-        # model.summary()
+        model.summary()
 
     def train_model(self, x_train, y_train,
                     batch_size=32, epochs=50):
