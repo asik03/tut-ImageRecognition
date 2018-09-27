@@ -41,7 +41,7 @@ class CNNSmile:
 
         model.add(Activation('sigmoid'))
 
-        optimizer = keras.optimizers.adam(lr=0.005)
+        optimizer = keras.optimizers.adam()
 
         model.compile(loss='binary_crossentropy',
                       optimizer=optimizer,
