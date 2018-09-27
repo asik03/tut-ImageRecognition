@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import os
 from shutil import copy
+import cv2 as cv
+
 
 from keras.preprocessing.image import ImageDataGenerator
 # from keras.preprocessing.image import load_img
@@ -58,4 +60,7 @@ class DataLoader:
 
         for new_path, old_path in zip(new_paths, old_paths):
             for file_path in old_path:
-                copy(file_path, new_path)
+                img = cv.imread(file_path)
+
+
+                copy(img, new_path)
