@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import os
 from shutil import copy
+import cv2 as cv
+from src.utilities.face_segmenter import FaceSegmenter
+
 
 from keras.preprocessing.image import ImageDataGenerator
 # from keras.preprocessing.image import load_img
@@ -58,4 +61,12 @@ class DataLoader:
 
         for new_path, old_path in zip(new_paths, old_paths):
             for file_path in old_path:
-                copy(file_path, new_path)
+                image = cv.imread(file_path)
+
+                [img_cropped_list, img_rect_list] = FaceSegmenter.segment(image)
+
+                if len(img_cropped_list) == 0:
+                    copy(file_path, new_path)
+
+                else:
+                    copy(img_cropped_list[0], new_path)

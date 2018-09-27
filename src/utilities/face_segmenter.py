@@ -8,8 +8,7 @@ class FaceSegmenter:
     def segment(cls, image):
         face_cascade = cv.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-        image_bgr = cv.cvtColor(image, cv.COLOR_RGB2BGR)
-        gray = cv.cvtColor(image_bgr, cv.COLOR_BGR2GRAY)
+        gray = cv.cvtColor(image, cv.COLOR_RGB2GRAY)
 
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
         img_cropped_list = []
