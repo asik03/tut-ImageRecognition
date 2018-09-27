@@ -1,7 +1,9 @@
-import cv2
+import cv2 as cv
+
+from src.utilities.face_segmenter import FaceSegmenter
 
 if __name__ == '__main__':
-    cap = cv2.VideoCapture(0)
+    cap = cv.VideoCapture(0)
 
     if not cap.isOpened():
         cap.open()
@@ -9,12 +11,14 @@ if __name__ == '__main__':
     while True:
         ret, frame = cap.read()
         if ret:
-            # TODO: Face segmentation
             # TODO: Smile recognition
-            cv2.imshow('frame', frame)
+            _, faces = FaceSegmenter.segment(frame)
+            for x, y, w, h in faces:
+                cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cv.imshow('frame', frame)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv.waitKey(1) & 0xFF == ord('q'):
             break
 
     cap.release()
-    cv2.destroyAllWindows()
+    cv.destroyAllWindows()

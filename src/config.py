@@ -5,3 +5,5 @@ PROJECT_DIR = os.path.join(SRC_DIR, '..')
 ETC_DIR = os.path.join(PROJECT_DIR, 'etc')
 TRAIN_DIR = os.path.join(ETC_DIR, 'train')
 TEST_DIR = os.path.join(ETC_DIR, 'test')
+
+XML_FACE = os.path.join(ETC_DIR, 'resources', 'haarcascade_frontalface_default.xml')
