@@ -11,10 +11,10 @@ class DataLoader:
     def get_train_generator(cls, data_path, classes, batch_size):
         data_gen = ImageDataGenerator(rescale=1.0/255)
 
-        train_path = os.path.join(data_path, 'train')
+        # train_path = os.path.join(data_path, 'train')
 
         train_generator = data_gen.flow_from_directory(
-                train_path,
+                data_path,
                 target_size=(64, 64),
                 batch_size=batch_size,
                 class_mode='binary',
