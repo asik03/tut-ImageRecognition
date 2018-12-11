@@ -23,7 +23,12 @@ if __name__ == '__main__':
                 image = cv.resize(image, (64, 64))
                 image = np.expand_dims(image, axis=0)
                 label = model.predict_classes(image)
-                labels.append(label)
+                if label == 1:
+                    text = 'Smile'
+                else:
+                    text = 'Non-smile'
+
+                labels.append(text)
             counter = 0
             for x, y, w, h in faces:
                 cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)

@@ -4,6 +4,8 @@ from keras.models import Sequential
 from keras.layers import Dense, Dropout, Activation, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 
+import matplotlib.pyplot as plt
+
 
 class CNNSmile:
     def __init__(self, dropout_prob=0.25):
@@ -51,10 +53,29 @@ class CNNSmile:
 
     def train_model(self, x_train, y_train,
                     batch_size=32, epochs=50):
-        self.model.fit(x_train, y_train,
-                       batch_size=batch_size,
-                       epochs=epochs,
-                       shuffle=True)
+        history = self.model.fit(x_train, y_train,
+                                 batch_size=batch_size,
+                                 epochs=epochs,
+                                 shuffle=True,
+                                 validation_split=0.1)
+        # list all data in history
+        print(history.history.keys())
+        # summarize history for accuracy
+        plt.plot(history.history['acc'])
+        plt.plot(history.history['val_acc'])
+        plt.title('model accuracy')
+        plt.ylabel('accuracy')
+        plt.xlabel('epoch')
+        plt.legend(['train', 'test'], loc='upper left')
+        plt.show()
+        # summarize history for loss
+        plt.plot(history.history['loss'])
+        plt.plot(history.history['val_loss'])
+        plt.title('model loss')
+        plt.ylabel('loss')
+        plt.xlabel('epoch')
+        plt.legend(['train', 'test'], loc='upper left')
+        plt.show()
 
     def train_generator_model(self, train_generator,
                               epochs=50):
